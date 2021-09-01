@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <link rel="stylesheet" href="style.css">
+        <p id = "pos"></p>
+        <p>this is a basic apple collecting game i made with javas canvas feature, its afily basic and a bit buggy in some cases but this was my first time working with key inputs and redrawing a canvas with certain inputs along with handling 'collisions'</p>
+        <script>
+            //i dont quite get how this works but i always need to use it for doing canvas stuff
+            //apparently it just helps with html -> java intergration
+            var canvas = document.getElementById('gameCanvas');
+            var ctx = canvas.getContext('2d');
+
+            
+
+            xpos = -0
+            ypos = 200
+            width = 10
+            height = 10
+
+            keypressed = false;
+
+            applescollected = 0;
+
+            GetNewRandom();
+
+            function GetNewRandom(){
+
+                applex = Math.round(Math.random() * 30);
+                appley = Math.round(Math.random() * 30);
+                Math.round(applex)
+                Math.round(appley)
+                applex = applex * 10;
+                appley = appley * 10;
+
+            }
+
+            function drawRect(x,y,w,h){
+
+                ctx.beginPath();
+                ctx.strokeStyle = "blue";
+                ctx.rect(x, y, w, h);
+                ctx.stroke();
+
+            }
+
+            function drawApple(xapple, yapple){
+
+                ctx.beginPath();
+                ctx.strokeStyle = "red";
+                ctx.rect(xapple, yapple, 10, 10)
+                ctx.stroke();
+
+            }
+            
+            ctx.beginPath();
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.stroke();
+            drawApple(appley, applex);
+            drawRect(xpos,ypos,width,height);
+
+            window.onkeydown = function(event){
+
+                var keyPr = event.keyCode; 
+
+                if(keyPr == 39 && keypressed == false){
+                    xpos = xpos + 10;
+                    keypressed = true;
+                }
+                if(keyPr == 37 && keypressed == false){
+                    xpos = xpos - 10;
+                    keypressed = true;
+                }
+                if(keyPr == 38 && keypressed == false){
+                    ypos = ypos - 10;
+                    keypressed = true;
+                }
+                if(keyPr == 40 && keypressed == false){
+                    ypos = ypos + 10;
+                    keypressed = true;
+                }
+                
+                if(xpos + ypos == applex + appley){
+
+                    GetNewRandom();
+                    applescollected = applescollected + 1;
+
+                }
+
+                ctx.clearRect(0,0,500,500);
+
+                var ppos = document.getElementById("pos");
+                ppos.innerText = applescollected;
+                
+                
+                ctx.fillStyle = "white";
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                ctx.stroke();
+                drawRect(xpos,ypos,width,height);
+                drawApple(appley, applex);
+
+            }
+
+            window.onkeyup = function(event){
+
+               keypressed = false;
+
+            }
+
+
+        </script>
+        <style>
+            canvas {border: 1px solid black;}
+        </style>
+
+    </body>
+</html>

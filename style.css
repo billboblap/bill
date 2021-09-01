@@ -1,0 +1,25 @@
+body{
+    background-image: url("bgimg.png");
+}
+h1 {
+    text-align: center;
+    color: rgb(218, 218, 218);
+    font-family: verdana;
+}
+p {
+    color: rgb(218, 218, 218);
+    border: 2px solid gray;
+    font-family: courier;
+}
+a{
+    color: aqua;
+    font-family: courier;
+}
+button{
+    border: none;
+    color: black;
+    padding: 64px 64px;
+    font-size: x-large;
+    margin: 6px 4px;
+    
+}
